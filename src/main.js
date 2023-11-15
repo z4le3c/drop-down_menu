@@ -1,4 +1,4 @@
 import './style.css'
 import { DDM } from './dropdownMenu'
 
-DDM.makeDropDownMenus()
+DDM.make()

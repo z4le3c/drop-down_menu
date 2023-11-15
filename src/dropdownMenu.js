@@ -1,6 +1,6 @@
 const DDM = {}
 
-DDM.makeDropDownMenus = () => {
+DDM.make = () => {
   const menuContainers = document.querySelectorAll('.menu-dropdown-container')
 
   for (const container of menuContainers) {
@@ -10,40 +10,40 @@ DDM.makeDropDownMenus = () => {
 
 const buildMenu = (container) => {
   let defaultItem
-  const items = []
+
   const menuSelect = document.createElement('div')
+  const itemContainer = document.createElement('div')
+
   menuSelect.classList.add('menu-select')
+  itemContainer.classList.add('menu-item-container')
   for (const item of Array.from(container.children)) {
     if (item.classList.contains('default-item')) {
       defaultItem = item
       item.classList.remove('default-item')
     }
-    // TODO add event to item menu when clicked
     item.addEventListener('click', () => {
-      toggleMenuItems(menuSelect, container, items)
+      toggleMenuItems(container, itemContainer)
       menuSelect.textContent = item.textContent
+      container.setAttribute('value', item.textContent)
     })
-    items.push(item)
     item.remove()
+    itemContainer.appendChild(item)
   }
   menuSelect.addEventListener('click', () =>
-    toggleMenuItems(menuSelect, container, items)
+    toggleMenuItems(container, itemContainer)
   )
   menuSelect.textContent = defaultItem.textContent
+  container.setAttribute('value', defaultItem.textContent)
   container.append(menuSelect)
 }
 
-const toggleMenuItems = (menuSelect, container, items) => {
-  if (menuSelect.classList.contains('open')) {
-    menuSelect.classList.remove('open')
-    for (const item of items) {
-      item.remove()
-    }
+const toggleMenuItems = (container, itemContainer) => {
+  if (container.classList.contains('open')) {
+    container.classList.remove('open')
+    itemContainer.remove()
   } else {
-    menuSelect.classList.add('open')
-    for (const item of items) {
-      container.append(item)
-    }
+    container.classList.add('open')
+    container.appendChild(itemContainer)
   }
 }
 
