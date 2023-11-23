@@ -2,7 +2,7 @@
   "name": "@z4le3c/drop-down_menu",
   "version": "1.0.0",
   "description": "Custom drop-down menu",
-  "main": "main.js",
+  "main": "dist/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
@@ -11,6 +11,9 @@
   "keywords": [
     "drop-down",
     "menu"
+  ],
+  "files": [
+    "dist/main.js"
   ],
   "author": "zalec",
   "license": "MIT",
